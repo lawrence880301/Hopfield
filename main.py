@@ -31,7 +31,7 @@ def start_test():
     f_plot = fig.add_subplot(111)
     test_list,num_per_line = prepare_data_list()
     iterate = int(entry_epoch.get())
-    test_element = np.array([test_list[int(test_index.get())]]).transpose()
+    test_element = np.array([test_list[int(test_index.get())-1]]).transpose()
     result = model.test(iterate, test_element)
     result=result.transpose()
     result=result.reshape(int(len(test_list[0])/num_per_line),num_per_line)
@@ -58,8 +58,6 @@ canvas.get_tk_widget().pack()
 select_train_data_btn = tk.Button(window, text='select training dataset', command=openfile).pack()
 start_train_btn = tk.Button(window, text='start training', command=start_train).pack()
 select_test_data_btn = tk.Button(window, text='select test dataset', command=openfile).pack()
-start_test_btn = tk.Button(window, text='start test', command=start_test).pack()
-
 tk.Label(window, text='聯想次數: ').pack()
 epoch = tk.IntVar()
 entry_epoch = tk.Entry(window, textvariable=epoch)
@@ -69,5 +67,9 @@ tk.Label(window, text='測試資料中第幾個: ').pack()
 test_index = tk.IntVar()
 entry_test_index = tk.Entry(window, textvariable=test_index)
 entry_test_index.pack()
+
+start_test_btn = tk.Button(window, text='start test', command=start_test).pack()
+
+
 
 window.mainloop()
